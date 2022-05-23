@@ -3,18 +3,19 @@ import axios from "axios";
 import { API_KEY, API_ROOT } from "../../../constants/environment";
 import Button from "../../reusable/Button";
 import InputSearch from "../../reusable/InputSearch";
-import { MainContainer, MainTop, MainBottom } from "./styles";
+import { MainContainer, MainTop, MainBottom, MainBadge } from "./styles";
 import Card from "../../reusable/Card";
+import SmallCard from "../../reusable/SmallCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import moment from "moment";
 
 // import PropTypes from 'prop-types'
 
 export default function MainWeather() {
-  const [searchData, setSearchData] = useState("55044");
   const [weatherData, setWeatherData] = useState(null);
   const [location, setLocation] = useState("");
   const [locationError, setLocationError] = useState("");
-
-  console.log(location);
 
   const searchByKey = (e) => {
     setLocationError("");
@@ -36,30 +37,83 @@ export default function MainWeather() {
           if (error.response.status === 404) {
             setLocationError("We don't currently have data for that location.");
           }
-          setLocationError("Oh no there was an retrieving that information!");
+          setLocationError(
+            "Oh no there was an error retrieving that information!"
+          );
         });
       setLocation("");
     }
   };
 
+  const getTimeZone = (timeToConvert) => {
+    const timeStampSunset = moment.unix(timeToConvert);
+    const formattedTime = moment(timeStampSunset).format("hh:mm a");
+    return formattedTime;
+  };
+
   return (
     <MainContainer>
       <MainTop>
-        <InputSearch
-          id={"main-weather-input"}
-          errorMessage={locationError}
-          keyFunction={searchByKey}
-          label={"Search By City or Zip Code"}
-          maxCharacter={"50"}
-          setErrorMessage={setLocationError}
-          type={"search"}
-          userValue={location}
-          userValueSetter={setLocation}
-        />
+        <div className="main-search-banner">
+          {weatherData ? (
+            <MainBadge>
+              <h1>
+                {weatherData.name} Feels Like{" "}
+                {weatherData.main.feels_like.toFixed()}°F
+              </h1>
+            </MainBadge>
+          ) : (
+            <h1>Weather Now</h1>
+          )}
+        </div>
+        <div>
+          <InputSearch
+            id={"main-weather-input"}
+            errorMessage={locationError}
+            keyFunction={searchByKey}
+            label={"Enter City or Zip Code"}
+            maxCharacter={"50"}
+            setErrorMessage={setLocationError}
+            type={"search"}
+            userValue={location}
+            userValueSetter={setLocation}
+          />
+        </div>
       </MainTop>
-      <MainBottom>
-        <Card />
-      </MainBottom>
+      {weatherData && (
+        <MainBottom>
+          <div>
+            <SmallCard
+              columnOneRowOne={weatherData.main.temp_max.toFixed() + " °F"}
+              columnOneRowTwo={"High"}
+              columnTwoRowOne={weatherData.main.temp_min.toFixed() + " °F"}
+              columnTwoRowTwo={"Low"}
+            />
+            <SmallCard
+              columnOneRowOne={weatherData.wind.speed.toFixed() + " MPH"}
+              columnOneRowTwo={"Wind Speed"}
+              columnTwoRowOne={weatherData.main.humidity.toFixed()}
+              columnTwoRowTwo={"Humidity"}
+            />
+          </div>
+          <div className="main-sunrise">
+            <div className="main-sunrise-text">
+              <FontAwesomeIcon icon={faSun} />
+              <div>Sunrise: {getTimeZone(weatherData.sys.sunrise)}</div>
+            </div>
+            <div className="main-sunrise-line"></div>
+            <div className="main-sunset-text">
+              <FontAwesomeIcon icon={faMoon} />
+              <div>Sunset: {getTimeZone(weatherData.sys.sunset)}</div>
+            </div>
+          </div>
+          <Card
+            centerData={weatherData.main.temp.toFixed()}
+            icon={weatherData.weather[0].icon}
+            title={"Current"}
+          />
+        </MainBottom>
+      )}
     </MainContainer>
   );
 }
