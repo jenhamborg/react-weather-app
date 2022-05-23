@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -18,6 +19,14 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(css)$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff)$/,
+        type: "asset/resource",
+      },
     ],
   },
   plugins: [
@@ -27,5 +36,6 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env": JSON.stringify(process.env),
     }),
+    new FaviconsWebpackPlugin("src/assets/images/favicon.ico"),
   ],
 };
