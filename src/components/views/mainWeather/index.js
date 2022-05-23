@@ -4,6 +4,7 @@ import { API_KEY, API_ROOT } from "../../../constants/environment";
 import Button from "../../reusable/Button";
 import InputSearch from "../../reusable/InputSearch";
 import { MainContainer, MainTop, MainBottom } from "./styles";
+import Card from "../../reusable/Card";
 
 // import PropTypes from 'prop-types'
 
@@ -12,27 +13,19 @@ export default function MainWeather() {
   const [weatherData, setWeatherData] = useState(null);
   const [location, setLocation] = useState("");
   const [locationError, setLocationError] = useState("");
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`;
 
-  const getWeather = () => {
-    axios
-      .get(url)
-      .then((res) => {
-        setWeatherData(res.data);
-        console.log(res.data);
-      })
-      .catch((error) => {
-        if (error.response.status === 404) {
-          setLocationError("We don't currently have data for that location.");
-        }
-        setLocationError("Oh no there was an retrieving that information!");
-      });
-    setLocation("");
-  };
+  console.log(location);
 
   const searchByKey = (e) => {
     setLocationError("");
+
     if (e.key === "Enter") {
+      let isZipCode = /^\d+$/.test(location);
+      let cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`;
+      let zipUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${location}&units=imperial&appid=${API_KEY}`;
+
+      let url = isZipCode ? zipUrl : cityUrl;
+      console.log(url);
       axios
         .get(url)
         .then((res) => {
@@ -56,16 +49,17 @@ export default function MainWeather() {
           id={"main-weather-input"}
           errorMessage={locationError}
           keyFunction={searchByKey}
-          label={"Search By City"}
+          label={"Search By City or Zip Code"}
           maxCharacter={"50"}
           setErrorMessage={setLocationError}
-          type={"text"}
+          type={"search"}
           userValue={location}
           userValueSetter={setLocation}
         />
-        <Button onClick={() => getWeather()} text={"Submit"} />
       </MainTop>
-      <MainBottom>Bottom Content</MainBottom>
+      <MainBottom>
+        <Card />
+      </MainBottom>
     </MainContainer>
   );
 }

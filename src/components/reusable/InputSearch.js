@@ -48,8 +48,8 @@ function InputSearch({
           data-testid={id}
           label={label}
           maxLength={maxCharacter}
-          onChange={(e) => userValueSetter(e.target.value)}
           onKeyPress={keyFunction}
+          onChange={(e) => userValueSetter(e.target.value)}
           value={userValue}
         />
         {/* <FontAwesomeIcon className="fa-2x" icon={faMagnifyingGlass} /> */}
