@@ -30,13 +30,16 @@ const CardContainer = styled.div`
   }
 `;
 
-export default function Card({ centerData, icon, title }) {
+export default function Card({ centerData, icon, iconDescription, title }) {
   return (
     <CardContainer>
       <h3>{title}</h3>
       <div>
         <div className="card-icon-container">
-          <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />
+          <img
+            src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+            alt={iconDescription}
+          />
         </div>
         <div className="card-center">{centerData}</div>
       </div>

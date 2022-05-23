@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { API_KEY, API_ROOT } from "../../../constants/environment";
-import Button from "../../reusable/Button";
+import { API_KEY } from "../../../constants/environment";
 import InputSearch from "../../reusable/InputSearch";
 import { MainContainer, MainTop, MainBottom, MainBadge } from "./styles";
 import Card from "../../reusable/Card";
@@ -10,12 +9,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 
-// import PropTypes from 'prop-types'
-
 export default function MainWeather() {
   const [weatherData, setWeatherData] = useState(null);
   const [location, setLocation] = useState("");
   const [locationError, setLocationError] = useState("");
+
+  console.log(weatherData);
 
   const searchByKey = (e) => {
     setLocationError("");
@@ -55,33 +54,52 @@ export default function MainWeather() {
     <MainContainer>
       <MainTop>
         <div className="main-search-banner">
+          <div className="main-input-banner">
+            <InputSearch
+              id={"main-search-input"}
+              errorMessage={locationError}
+              keyFunction={searchByKey}
+              label={"Enter City or Zip Code"}
+              maxCharacter={"50"}
+              setErrorMessage={setLocationError}
+              type={"search"}
+              userValue={location}
+              userValueSetter={setLocation}
+            />
+          </div>
           {weatherData ? (
             <MainBadge>
               <h1>
-                {weatherData.name} Feels Like{" "}
-                {weatherData.main.feels_like.toFixed()}°F
+                Feels Like {weatherData.main.feels_like.toFixed()}°F in{" "}
+                {weatherData.name}
               </h1>
             </MainBadge>
           ) : (
-            <h1>Weather Now</h1>
+            <MainBadge>
+              <h1>Weather Now</h1>
+            </MainBadge>
           )}
-        </div>
-        <div>
-          <InputSearch
-            id={"main-weather-input"}
-            errorMessage={locationError}
-            keyFunction={searchByKey}
-            label={"Enter City or Zip Code"}
-            maxCharacter={"50"}
-            setErrorMessage={setLocationError}
-            type={"search"}
-            userValue={location}
-            userValueSetter={setLocation}
-          />
         </div>
       </MainTop>
       {weatherData && (
         <MainBottom>
+          <Card
+            centerData={weatherData.main.temp.toFixed() + "°F"}
+            icon={weatherData.weather[0].icon}
+            iconDescription={weatherData.weather[0].description}
+            title={"Current"}
+          />
+          <div className="main-sunrise">
+            <div className="main-sunrise-text">
+              <FontAwesomeIcon icon={faSun} />
+              <div>Sunrise: {getTimeZone(weatherData.sys.sunrise)}</div>
+            </div>
+            <div className="main-sunrise-line"></div>
+            <div className="main-sunset-text">
+              <FontAwesomeIcon icon={faMoon} />
+              <div>Sunset: {getTimeZone(weatherData.sys.sunset)}</div>
+            </div>
+          </div>
           <div>
             <SmallCard
               columnOneRowOne={weatherData.main.temp_max.toFixed() + " °F"}
@@ -96,22 +114,6 @@ export default function MainWeather() {
               columnTwoRowTwo={"Humidity"}
             />
           </div>
-          <div className="main-sunrise">
-            <div className="main-sunrise-text">
-              <FontAwesomeIcon icon={faSun} />
-              <div>Sunrise: {getTimeZone(weatherData.sys.sunrise)}</div>
-            </div>
-            <div className="main-sunrise-line"></div>
-            <div className="main-sunset-text">
-              <FontAwesomeIcon icon={faMoon} />
-              <div>Sunset: {getTimeZone(weatherData.sys.sunset)}</div>
-            </div>
-          </div>
-          <Card
-            centerData={weatherData.main.temp.toFixed()}
-            icon={weatherData.weather[0].icon}
-            title={"Current"}
-          />
         </MainBottom>
       )}
     </MainContainer>

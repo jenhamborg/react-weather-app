@@ -6,7 +6,7 @@ import Clouds from "./assets/images/clouds.jpg";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.95));
   color: #ffffff;

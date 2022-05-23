@@ -11,14 +11,14 @@ export const MainContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const MainTop = styled.div`
+export const MainTop = styled.header`
   .main-search-banner {
     font-size: 4rem;
     text-align: center;
   }
 `;
 
-export const MainBottom = styled.div`
+export const MainBottom = styled.main`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -27,8 +27,13 @@ export const MainBottom = styled.div`
   .main-sunrise-line {
     margin-bottom: auto;
     margin-top: auto;
-    border-left: 3px solid #ffb81c;
+    border-left: 4px solid #ffb81c;
     height: 130px;
+    @media (max-width: 631px) {
+      border-left: none;
+      border-bottom: 4px solid #ffb81c;
+      height: 50px;
+    }
   }
   .main-sunrise {
     display: flex;
@@ -38,7 +43,10 @@ export const MainBottom = styled.div`
     color: #ffb81c;
     font-size: 1.25rem;
     text-align: center;
-    width: 150px;
+    width: 300px;
+    @media (max-width: 631px) {
+      margin-top: 1rem;
+    }
   }
   .main-sunrise-text {
     justify-self: flex-start;
@@ -51,11 +59,15 @@ export const MainBottom = styled.div`
 export const MainBadge = styled.div`
   display: flex;
   align-items: center;
+  padding-top: 3rem;
   justify-content: center;
   flex: row;
   width: 100%;
   h1 {
     font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.5rem;
   }
   image {
     padding-top: 2rem;

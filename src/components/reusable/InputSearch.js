@@ -41,9 +41,8 @@ function InputSearch({
     <Input>
       <div className="input-container">
         <input
+          id={id + "-1"}
           type={type}
-          id={id}
-          data-testid={id}
           label={label}
           maxLength={maxCharacter}
           onKeyPress={keyFunction}
@@ -51,7 +50,7 @@ function InputSearch({
           value={userValue}
         />
       </div>
-      <label htmlFor={id}>{!errorMessage ? label : errorMessage}</label>
+      <label htmlFor={id + "-1"}>{!errorMessage ? label : errorMessage}</label>
     </Input>
   );
 }
