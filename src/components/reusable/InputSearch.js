@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { placeholder } from "@babel/types";
 
 const Input = styled.div`
   align-items: center;

@@ -4,7 +4,7 @@ import axios from "axios";
 import { MainContainer, MainHeader, MainContent } from "./styles";
 
 import Card from "../../reusable/Card";
-import ButtonMedium from "../../reusable/Button";
+import ButtonMedium from "../../reusable/ButtonMedium";
 import InputSearch from "../../reusable/InputSearch";
 import SmallCard from "../../reusable/SmallCard";
 import { API_KEY } from "../../../constants/environment";

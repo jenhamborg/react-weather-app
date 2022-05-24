@@ -8,10 +8,10 @@ describe("App component", () => {
     render(<App />);
   });
   afterEach(cleanup);
-//   it("should not have basic accessibility issues", async () => {
-//     const { container } = render(<App />);
-//     const results = await axe(container);
-//     expect(results).toHaveNoViolations();
-//   });
+  it("should not have basic accessibility issues", async () => {
+    const { container } = render(<App />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
 
 });

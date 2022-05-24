@@ -1,4 +1,4 @@
-import React, { useState as useStateMock } from "react";
+import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import InputSearch from "../components/reusable/InputSearch";
 import { act } from "react-dom/test-utils";
