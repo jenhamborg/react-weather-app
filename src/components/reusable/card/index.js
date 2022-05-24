@@ -10,8 +10,9 @@ const CardContainer = styled.div`
   text-align: center;
   height: 265px;
   width: 300px;
-  h3 {
+  h2 {
     font-size: 2rem;
+    color: #242526;
   }
   .card-center {
     font-size: 4rem;
@@ -30,7 +31,7 @@ const CardContainer = styled.div`
 export default function Card({ centerData, icon, iconDescription, title }) {
   return (
     <CardContainer>
-      <h3>{title}</h3>
+      <h2>{title}</h2>
       <div>
         <div className="card-icon-container">
           <img

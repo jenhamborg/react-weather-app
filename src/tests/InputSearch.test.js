@@ -1,6 +1,6 @@
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
-import InputSearch from "../components/reusable/InputSearch";
+import InputSearch from "../components/reusable/searchInput";
 import { act } from "react-dom/test-utils";
 
 describe("Input Search Component", () => {

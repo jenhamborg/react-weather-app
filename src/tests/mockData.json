@@ -1,0 +1,43 @@
+{
+   "coord":{
+      "lon":-93.2427,
+      "lat":44.6497
+   },
+   "weather":[
+      {
+         "id":804,
+         "main":"Clouds",
+         "description":"overcast clouds",
+         "icon":"04d"
+      }
+   ],
+   "base":"stations",
+   "main":{
+      "temp":284.93,
+      "feels_like":283.36,
+      "temp_min":284.02,
+      "temp_max":285.92,
+      "pressure":1018,
+      "humidity":46
+   },
+   "visibility":10000,
+   "wind":{
+      "speed":4.63,
+      "deg":290
+   },
+   "clouds":{
+      "all":100
+   },
+   "dt":1653174765,
+   "sys":{
+      "type":1,
+      "id":4782,
+      "country":"US",
+      "sunrise":1653129538,
+      "sunset":1653183628
+   },
+   "timezone":-18000,
+   "id":5034059,
+   "name":"Lakeville",
+   "cod":200
+}

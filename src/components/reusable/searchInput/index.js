@@ -43,7 +43,7 @@ function InputSearch({
       <div className="input-container">
         <input
           data-testid="input"
-          aria-labelledby={label}
+          aria-label={label}
           type={type}
           label={label}
           maxLength={maxCharacter}

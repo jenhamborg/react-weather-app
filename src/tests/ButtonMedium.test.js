@@ -1,6 +1,6 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
-import ButtonMedium from "../components/reusable/ButtonMedium";
+import ButtonMedium from "../components/reusable/mediumButton";
 
 describe("Medium Button", () => {
   afterEach(() => {

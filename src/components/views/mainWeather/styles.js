@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const MainContainer = styled.div`
   font-family: "Oswald", sans-serif;
   margin: auto;
-  max-width: 700px;
+  max-width: 800px;
   padding: 2rem;
   position: relative;
   top: 5%;
@@ -45,9 +45,11 @@ export const MainContent = styled.div`
   }
   h1 {
     font-size: 1.5rem;
+    color: #f6be00;
   }
   h2 {
     font-size: 1.5rem;
+    color: #7cfc00;
   }
   image {
     padding-top: 2rem;

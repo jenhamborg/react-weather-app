@@ -3,30 +3,45 @@ import axios from "axios";
 
 import { MainContainer, MainHeader, MainContent } from "./styles";
 
-import Card from "../../reusable/Card";
-import ButtonMedium from "../../reusable/ButtonMedium";
-import InputSearch from "../../reusable/InputSearch";
-import SmallCard from "../../reusable/SmallCard";
-import { API_KEY } from "../../../constants/environment";
+import Card from "../../reusable/card";
+import ButtonMedium from "../../reusable/mediumButton";
+import InputSearch from "../../reusable/searchInput";
+import SmallCard from "../../reusable/smallCard";
+import { API_KEY, API_ROOT } from "../../../constants/environment";
 
 export default function MainWeather() {
   const [weatherData, setWeatherData] = useState(null);
+  const [airQuality, setAirQuality] = useState(null);
   const [location, setLocation] = useState("");
   const [locationError, setLocationError] = useState("");
+
 
   const searchByKey = (e) => {
     setLocationError("");
 
     if (e.key === "Enter") {
       let isZipCode = /^\d+$/.test(location);
-      let cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`;
-      let zipUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${location}&units=imperial&appid=${API_KEY}`;
+      let cityUrl = `${API_ROOT}/weather?q=${location}&units=imperial&appid=${API_KEY}`;
+      let zipUrl = `${API_ROOT}/weather?zip=${location}&units=imperial&appid=${API_KEY}`;
       let url = isZipCode ? zipUrl : cityUrl;
 
       axios
         .get(url)
         .then((res) => {
+          const {
+            coord: { lat, lon },
+          } = res.data;
           setWeatherData(res.data);
+          console.log(lat, lon);
+          return axios
+            .get(
+              `${API_ROOT}/air_pollution/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+            )
+            .then((res) => {
+              const airQuality = res.data.list[0].main.aqi;
+
+              setAirQuality(getAirQuality(airQuality));
+            });
         })
         .catch((error) => {
           if (error.response.status === 404) {
@@ -39,7 +54,7 @@ export default function MainWeather() {
   };
 
   const handleClick = (e, city) => {
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${API_KEY}`;
+    let url = `${API_ROOT}/weather?q=${city}&units=imperial&appid=${API_KEY}`;
     axios
       .get(url)
       .then((res) => {
@@ -51,6 +66,23 @@ export default function MainWeather() {
     setLocation("");
   };
 
+  const getAirQuality = (airQual) => {
+    switch (airQual) {
+      case 1:
+        return "Good";
+      case 2:
+        return "Fair";
+      case 3:
+        return "Moderate";
+      case 4:
+        return "Poor";
+      case 5:
+        return "Very Poor";
+      default:
+        return "No Data";
+    }
+  };
+
   return (
     <MainContainer>
       <MainHeader>
@@ -58,7 +90,7 @@ export default function MainWeather() {
         <InputSearch
           errorMessage={locationError}
           keyFunction={searchByKey}
-          label={"enter city or zip code and hit enter"}
+          label={"search by city or zip code"}
           maxCharacter={"50"}
           setErrorMessage={setLocationError}
           placeholder={"Enter City or Zip Code"}
@@ -71,10 +103,13 @@ export default function MainWeather() {
       <MainContent>
         {weatherData && (
           <>
-            <h1>
-              Feels Like {weatherData.main.feels_like.toFixed()}°F in{" "}
-              {weatherData.name}
-            </h1>
+            <div className="main-cards">
+              <h1>
+                Feels Like {weatherData.main.feels_like.toFixed()}°F in{" "}
+                {weatherData.name}
+              </h1>
+              {airQuality && <h2>Air Quality Index: {airQuality}</h2>}
+            </div>
             <div className="main-cards">
               <div className="main-small-cards">
                 <SmallCard
