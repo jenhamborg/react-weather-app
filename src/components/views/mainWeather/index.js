@@ -71,6 +71,7 @@ export default function MainWeather() {
     axios
       .get(url)
       .then((res) => {
+        setFeature(null);
         setWeatherData(res.data);
       })
       .catch((error) => {
