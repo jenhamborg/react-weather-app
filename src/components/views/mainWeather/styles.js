@@ -20,6 +20,7 @@ export const MainHeader = styled.header`
   h1 {
     font-size: 2.5rem;
     margin-top: 1rem;
+    margin-left: 1rem;
   }
 `;
 
@@ -54,4 +55,9 @@ export const MainContent = styled.div`
   image {
     padding-top: 2rem;
   }
+`;
+
+export const Feature = styled.div`
+  height: 400px;
+  width: 100%;
 `;

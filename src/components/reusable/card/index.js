@@ -8,7 +8,7 @@ const CardContainer = styled.div`
   border-radius: 4px;
   color: #242526;
   text-align: center;
-  height: 265px;
+  height: 270px;
   width: 300px;
   h2 {
     font-size: 2rem;

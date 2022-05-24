@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { MainContainer, MainHeader, MainContent } from "./styles";
+import { MainContainer, MainHeader, MainContent, Feature } from "./styles";
 
 import Card from "../../reusable/card";
 import ButtonMedium from "../../reusable/mediumButton";
@@ -10,11 +10,23 @@ import SmallCard from "../../reusable/smallCard";
 import { API_KEY, API_ROOT } from "../../../constants/environment";
 
 export default function MainWeather() {
+  const [feature, setFeature] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
   const [airQuality, setAirQuality] = useState(null);
   const [location, setLocation] = useState("");
   const [locationError, setLocationError] = useState("");
 
+  useEffect(() => {
+    const url = `${API_ROOT}/weather?q=lakeville&units=imperial&appid=${API_KEY}`;
+    axios
+      .get(url)
+      .then((res) => {
+        setFeature(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const searchByKey = (e) => {
     setLocationError("");
@@ -31,8 +43,9 @@ export default function MainWeather() {
           const {
             coord: { lat, lon },
           } = res.data;
+          setFeature(null);
           setWeatherData(res.data);
-          console.log(lat, lon);
+
           return axios
             .get(
               `${API_ROOT}/air_pollution/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
@@ -166,6 +179,37 @@ export default function MainWeather() {
               text={"Los Angeles"}
             />
           </div>
+          {feature && (
+            <>
+              <h1>Featured Location: {feature.name}</h1>
+              <Feature>
+                <div className="main-cards">
+                  <div className="main-small-cards">
+                    <SmallCard
+                      columnOneRowOne={feature.main.temp_max.toFixed() + " °F"}
+                      columnOneRowTwo={"High"}
+                      columnTwoRowOne={feature.main.temp_min.toFixed() + " °F"}
+                      columnTwoRowTwo={"Low"}
+                    />
+                    <SmallCard
+                      columnOneRowOne={feature.wind.speed.toFixed() + " MPH"}
+                      columnOneRowTwo={"Wind Speed"}
+                      columnTwoRowOne={feature.main.humidity.toFixed()}
+                      columnTwoRowTwo={"Humidity"}
+                    />
+                  </div>
+                  <div>
+                    <Card
+                      centerData={feature.main.temp.toFixed() + "°F"}
+                      icon={feature.weather[0].icon}
+                      iconDescription={feature.weather[0].description}
+                      title={"Current"}
+                    />
+                  </div>
+                </div>
+              </Feature>
+            </>
+          )}
         </>
       </MainContent>
     </MainContainer>
