@@ -9,7 +9,6 @@ const CardContainer = styled.div`
   background-color: rgba(255, 255, 255, 0.95);
   border-radius: 4px;
   color: #242526;
-  margin-bottom: 1rem;
   text-align: center;
   height: 125px;
   width: 300px;

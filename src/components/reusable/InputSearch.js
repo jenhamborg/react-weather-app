@@ -4,31 +4,31 @@ import styled from "styled-components";
 
 const Input = styled.div`
   align-items: center;
-  display: flex;
-  flex-direction: column;
+  margin-top: 0.5rem;
   position: relative;
   padding: 1rem;
-  width: 100%;
   .input-container {
     position: relative;
   }
+  .input-error-message {
+    font-size: 1.25rem;
+  }
   input {
     color: #f8f8f8;
-    padding: 0.7rem 1.5rem;
-    font-size: 1.5rem;
+    padding: 0.7rem 1.25rem;
+    font-size: 1.35rem;
     border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, 0.8);
     background: rgba(0, 0, 0, 0.1);
-    height: 60px;
-  }
-  label {
-    font-size: 1.5rem;
-    padding-top: 1rem;
+    height: 50px;
+    ::placeholder {
+      color: #f8f8f8;
+      font-size: 1.25rem;
+    }
   }
 `;
 
 function InputSearch({
-  id,
   errorMessage,
   keyFunction,
   label,
@@ -41,16 +41,17 @@ function InputSearch({
     <Input>
       <div className="input-container">
         <input
-          id={id + "-1"}
+          aria-label={label}
           type={type}
           label={label}
           maxLength={maxCharacter}
           onKeyPress={keyFunction}
           onChange={(e) => userValueSetter(e.target.value)}
           value={userValue}
+          placeholder="Enter City or Zip Code"
         />
       </div>
-      <label htmlFor={id + "-1"}>{!errorMessage ? label : errorMessage}</label>
+      <div className="input-error-message">{errorMessage && errorMessage}</div>
     </Input>
   );
 }
@@ -58,7 +59,6 @@ function InputSearch({
 export default InputSearch;
 
 InputSearch.propTypes = {
-  id: PropTypes.string,
   errorMessage: PropTypes.string,
   label: PropTypes.string,
   keyFunction: PropTypes.func,

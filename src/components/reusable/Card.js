@@ -3,10 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const CardContainer = styled.div`
-  display: flex;
   align-content: center;
-  justify-content: space-evenly;
-  flex-direction: column;
   background-color: rgba(255, 255, 255, 0.95);
   border-radius: 4px;
   color: #242526;
@@ -50,5 +47,6 @@ export default function Card({ centerData, icon, iconDescription, title }) {
 Card.propTypes = {
   centerData: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   icon: PropTypes.string,
+  iconDescription: PropTypes.string,
   title: PropTypes.string,
 };

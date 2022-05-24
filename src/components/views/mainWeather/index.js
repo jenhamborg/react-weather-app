@@ -2,19 +2,17 @@ import React, { useState } from "react";
 import axios from "axios";
 import { API_KEY } from "../../../constants/environment";
 import InputSearch from "../../reusable/InputSearch";
-import { MainContainer, MainTop, MainBottom, MainBadge } from "./styles";
+import { MainContainer, MainHeader, MainContent } from "./styles";
+
+import Button from "../../reusable/Button";
 import Card from "../../reusable/Card";
 import SmallCard from "../../reusable/SmallCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
-import moment from "moment";
+import ButtonMedium from "../../reusable/Button";
 
 export default function MainWeather() {
   const [weatherData, setWeatherData] = useState(null);
   const [location, setLocation] = useState("");
   const [locationError, setLocationError] = useState("");
-
-  console.log(weatherData);
 
   const searchByKey = (e) => {
     setLocationError("");
@@ -23,99 +21,117 @@ export default function MainWeather() {
       let isZipCode = /^\d+$/.test(location);
       let cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`;
       let zipUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${location}&units=imperial&appid=${API_KEY}`;
-
       let url = isZipCode ? zipUrl : cityUrl;
-      console.log(url);
+
       axios
         .get(url)
         .then((res) => {
           setWeatherData(res.data);
-          console.log(res.data);
         })
         .catch((error) => {
           if (error.response.status === 404) {
             setLocationError("We don't currently have data for that location.");
           }
-          setLocationError(
-            "Oh no there was an error retrieving that information!"
-          );
+          setLocationError("Oh no we didn't recognize your request!");
         });
       setLocation("");
     }
   };
 
-  const getTimeZone = (timeToConvert) => {
-    const timeStampSunset = moment.unix(timeToConvert);
-    const formattedTime = moment(timeStampSunset).format("hh:mm a");
-    return formattedTime;
+  const handleClick = (e, city) => {
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${API_KEY}`;
+    axios
+      .get(url)
+      .then((res) => {
+        setWeatherData(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setLocation("");
   };
 
   return (
     <MainContainer>
-      <MainTop>
-        <div className="main-search-banner">
-          <div className="main-input-banner">
-            <InputSearch
-              id={"main-search-input"}
-              errorMessage={locationError}
-              keyFunction={searchByKey}
-              label={"Enter City or Zip Code"}
-              maxCharacter={"50"}
-              setErrorMessage={setLocationError}
-              type={"search"}
-              userValue={location}
-              userValueSetter={setLocation}
-            />
-          </div>
-          {weatherData ? (
-            <MainBadge>
-              <h1>
-                Feels Like {weatherData.main.feels_like.toFixed()}°F in{" "}
-                {weatherData.name}
-              </h1>
-            </MainBadge>
-          ) : (
-            <MainBadge>
-              <h1>Weather Now</h1>
-            </MainBadge>
-          )}
-        </div>
-      </MainTop>
-      {weatherData && (
-        <MainBottom>
-          <Card
-            centerData={weatherData.main.temp.toFixed() + "°F"}
-            icon={weatherData.weather[0].icon}
-            iconDescription={weatherData.weather[0].description}
-            title={"Current"}
-          />
-          <div className="main-sunrise">
-            <div className="main-sunrise-text">
-              <FontAwesomeIcon icon={faSun} />
-              <div>Sunrise: {getTimeZone(weatherData.sys.sunrise)}</div>
+      <MainHeader>
+        <h1>Weather Now</h1>
+        <InputSearch
+          errorMessage={locationError}
+          keyFunction={searchByKey}
+          label={"enter city or zip code and hit enter"}
+          maxCharacter={"50"}
+          setErrorMessage={setLocationError}
+          type={"search"}
+          userValue={location}
+          userValueSetter={setLocation}
+        />
+      </MainHeader>
+
+      <MainContent>
+        {weatherData && (
+          <>
+            <h1>
+              Feels Like {weatherData.main.feels_like.toFixed()}°F in{" "}
+              {weatherData.name}
+            </h1>
+            <div className="main-cards">
+              <div className="main-small-cards">
+                <SmallCard
+                  columnOneRowOne={weatherData.main.temp_max.toFixed() + " °F"}
+                  columnOneRowTwo={"High"}
+                  columnTwoRowOne={weatherData.main.temp_min.toFixed() + " °F"}
+                  columnTwoRowTwo={"Low"}
+                />
+                <SmallCard
+                  columnOneRowOne={weatherData.wind.speed.toFixed() + " MPH"}
+                  columnOneRowTwo={"Wind Speed"}
+                  columnTwoRowOne={weatherData.main.humidity.toFixed()}
+                  columnTwoRowTwo={"Humidity"}
+                />
+              </div>
+              <div>
+                <Card
+                  centerData={weatherData.main.temp.toFixed() + "°F"}
+                  icon={weatherData.weather[0].icon}
+                  iconDescription={weatherData.weather[0].description}
+                  title={"Current"}
+                />
+              </div>
             </div>
-            <div className="main-sunrise-line"></div>
-            <div className="main-sunset-text">
-              <FontAwesomeIcon icon={faMoon} />
-              <div>Sunset: {getTimeZone(weatherData.sys.sunset)}</div>
-            </div>
-          </div>
-          <div>
-            <SmallCard
-              columnOneRowOne={weatherData.main.temp_max.toFixed() + " °F"}
-              columnOneRowTwo={"High"}
-              columnTwoRowOne={weatherData.main.temp_min.toFixed() + " °F"}
-              columnTwoRowTwo={"Low"}
+          </>
+        )}
+        <>
+          <div className="main-button-group">
+            <ButtonMedium
+              handleClick={(e) => handleClick(e, "New York")}
+              text={"New York"}
             />
-            <SmallCard
-              columnOneRowOne={weatherData.wind.speed.toFixed() + " MPH"}
-              columnOneRowTwo={"Wind Speed"}
-              columnTwoRowOne={weatherData.main.humidity.toFixed()}
-              columnTwoRowTwo={"Humidity"}
+            <ButtonMedium
+              handleClick={(e) => handleClick(e, "Washington DC")}
+              text={"Washington DC"}
+            />
+
+            <ButtonMedium
+              handleClick={(e) => handleClick(e, "Chicago")}
+              text={"Chicago"}
+            />
+
+            <ButtonMedium
+              handleClick={(e) => handleClick(e, "Minneapolis")}
+              text={"Minneapolis"}
+            />
+
+            <ButtonMedium
+              handleClick={(e) => handleClick(e, "Dallas")}
+              text={"Dallas"}
+            />
+            <ButtonMedium
+              handleClick={(e) => handleClick(e, "Los Angeles")}
+              text={"Los Angeles"}
             />
           </div>
-        </MainBottom>
-      )}
+        </>
+      </MainContent>
     </MainContainer>
   );
 }
