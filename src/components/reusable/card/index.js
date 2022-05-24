@@ -35,6 +35,7 @@ export default function Card({ centerData, icon, iconDescription, title }) {
       <div>
         <div className="card-icon-container">
           <img
+            data-testid="card-icon"
             src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
             alt={iconDescription}
           />
