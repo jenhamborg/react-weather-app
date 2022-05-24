@@ -1,6 +1,12 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import ButtonMedium from "../components/reusable/mediumButton";
+import renderer from "react-test-renderer";
+
+it("renders correctly", () => {
+  const tree = renderer.create(<ButtonMedium />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
 
 describe("Medium Button", () => {
   afterEach(() => {

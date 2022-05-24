@@ -104,7 +104,7 @@ export default function MainWeather() {
           errorMessage={locationError}
           keyFunction={searchByKey}
           label={"search by city or zip code"}
-          maxCharacter={"50"}
+          maxCharacter={"25"}
           setErrorMessage={setLocationError}
           placeholder={"Enter City or Zip Code"}
           type={"search"}

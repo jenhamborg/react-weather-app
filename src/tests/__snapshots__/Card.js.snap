@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="card__CardContainer-sc-1i2k6yt-0 jjzxfP"
+>
+  <h2 />
+  <div>
+    <div
+      className="card-icon-container"
+    >
+      <img
+        data-testid="card-icon"
+        src="http://openweathermap.org/img/wn/undefined@2x.png"
+      />
+    </div>
+    <div
+      className="card-center"
+    />
+  </div>
+</div>
+`;

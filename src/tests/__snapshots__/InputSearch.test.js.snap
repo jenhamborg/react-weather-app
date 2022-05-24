@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="searchInput__Input-sc-7ewft-0 kzurIl"
+>
+  <div
+    className="input-container"
+  >
+    <input
+      data-testid="input"
+      onChange={[Function]}
+    />
+  </div>
+  <div
+    className="input-error-message"
+  />
+</div>
+`;

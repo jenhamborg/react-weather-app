@@ -1,6 +1,12 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import SmallCard from "../components/reusable/smallCard";
+import renderer from "react-test-renderer";
+
+it("renders correctly", () => {
+  const tree = renderer.create(<SmallCard />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
 
 describe("Small Card", () => {
   afterEach(() => {

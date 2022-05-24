@@ -1,6 +1,12 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import Card from "../components/reusable/card";
+import renderer from "react-test-renderer";
+
+it("renders correctly", () => {
+  const tree = renderer.create(<Card />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
 
 describe("Card", () => {
   afterEach(() => {

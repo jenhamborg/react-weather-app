@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="smallCard__CardContainer-sc-1smmpz4-0 eNOGhc"
+>
+  <div
+    className="sm-card-col-one"
+  >
+    <div
+      className="sm-card-row-one"
+    />
+    <div
+      className="sm-card-row-two"
+    />
+  </div>
+  <div
+    className="sm-card-vl"
+  />
+  <div
+    className="sm-card-col-two"
+  >
+    <div
+      className="sm-card-row-one"
+    />
+    <div
+      className="sm-card-row-two"
+    />
+  </div>
+</div>
+`;

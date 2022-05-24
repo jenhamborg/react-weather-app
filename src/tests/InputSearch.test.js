@@ -2,6 +2,12 @@ import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import InputSearch from "../components/reusable/searchInput";
 import { act } from "react-dom/test-utils";
+import renderer from "react-test-renderer";
+
+it("renders correctly", () => {
+  const tree = renderer.create(<InputSearch />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
 
 describe("Input Search Component", () => {
   const mockFunction = jest.fn();
