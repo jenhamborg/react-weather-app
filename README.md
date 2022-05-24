@@ -5,14 +5,14 @@ React Weather App created with Babel and Webpack.
 ## Running the project locally
 
 Clone Repo
-Create .env file
-Get free api key from https://openweathermap.org/ for the current api or see Jenny for the Key
-run npm install
+copy .env file from .env.example
+Get free api key from https://openweathermap.org/ for the current weather api.
+run `npm install`
 open browser to http://localhost:8080/
 
 ## Deployment
 
-npm run build
+`npm run build`
 
 ## Tests
 
