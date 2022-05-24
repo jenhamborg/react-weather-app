@@ -22,3 +22,7 @@ npm run test
 ## Test Coverage report
 
 After running npm run test a coverage report can be found here: coverage/lcov-report/index.html which you can open in the browser.
+
+## Code Formatting and Style
+
+Uses airbnb config for eslint and prettier for formatting.
