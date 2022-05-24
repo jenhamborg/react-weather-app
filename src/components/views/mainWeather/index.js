@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { API_KEY } from "../../../constants/environment";
-import InputSearch from "../../reusable/InputSearch";
+
 import { MainContainer, MainHeader, MainContent } from "./styles";
 
-import Button from "../../reusable/Button";
 import Card from "../../reusable/Card";
-import SmallCard from "../../reusable/SmallCard";
 import ButtonMedium from "../../reusable/Button";
+import InputSearch from "../../reusable/InputSearch";
+import SmallCard from "../../reusable/SmallCard";
+import { API_KEY } from "../../../constants/environment";
 
 export default function MainWeather() {
   const [weatherData, setWeatherData] = useState(null);
@@ -61,6 +61,7 @@ export default function MainWeather() {
           label={"enter city or zip code and hit enter"}
           maxCharacter={"50"}
           setErrorMessage={setLocationError}
+          placeholder={"Enter City or Zip Code"}
           type={"search"}
           userValue={location}
           userValueSetter={setLocation}

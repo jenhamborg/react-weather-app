@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { placeholder } from "@babel/types";
 
 const Input = styled.div`
   align-items: center;
@@ -33,6 +34,7 @@ function InputSearch({
   keyFunction,
   label,
   maxCharacter,
+  placeholder,
   userValue,
   userValueSetter,
   type,
@@ -41,14 +43,15 @@ function InputSearch({
     <Input>
       <div className="input-container">
         <input
-          aria-label={label}
+          data-testid="input"
+          aria-labelledby={label}
           type={type}
           label={label}
           maxLength={maxCharacter}
           onKeyPress={keyFunction}
           onChange={(e) => userValueSetter(e.target.value)}
           value={userValue}
-          placeholder="Enter City or Zip Code"
+          placeholder={placeholder}
         />
       </div>
       <div className="input-error-message">{errorMessage && errorMessage}</div>
@@ -63,6 +66,7 @@ InputSearch.propTypes = {
   label: PropTypes.string,
   keyFunction: PropTypes.func,
   maxCharacter: PropTypes.string,
+  placeholder: PropTypes.string,
   setErrorMessage: PropTypes.func,
   userValue: PropTypes.string,
   userValueSetter: PropTypes.func,
