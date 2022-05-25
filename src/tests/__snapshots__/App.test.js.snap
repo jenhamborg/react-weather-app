@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="App__Container-sc-oucsgb-0 eCvKKh"
+>
+  <div
+    className="styles__MainContainer-sc-izij1-0 iLpuxe"
+  >
+    <header
+      className="styles__MainHeader-sc-izij1-1 jqrRpz"
+    >
+      <h1>
+        Weather Now
+      </h1>
+      <div
+        className="searchInput__Input-sc-7ewft-0 kzurIl"
+      >
+        <div
+          className="input-container"
+        >
+          <input
+            aria-label="search by city or zip code"
+            data-testid="input"
+            label="search by city or zip code"
+            maxLength="25"
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            placeholder="Enter City or Zip Code"
+            type="search"
+            value=""
+          />
+        </div>
+        <div
+          className="input-error-message"
+        />
+      </div>
+    </header>
+    <div
+      className="styles__MainContent-sc-izij1-2 bbPpsm"
+    >
+      <div
+        className="main-button-group"
+      >
+        <button
+          className="mediumButton__Button-sc-1e5cium-0 dScmLB"
+          onClick={[Function]}
+        >
+          New York
+        </button>
+        <button
+          className="mediumButton__Button-sc-1e5cium-0 dScmLB"
+          onClick={[Function]}
+        >
+          Washington DC
+        </button>
+        <button
+          className="mediumButton__Button-sc-1e5cium-0 dScmLB"
+          onClick={[Function]}
+        >
+          Chicago
+        </button>
+        <button
+          className="mediumButton__Button-sc-1e5cium-0 dScmLB"
+          onClick={[Function]}
+        >
+          Minneapolis
+        </button>
+        <button
+          className="mediumButton__Button-sc-1e5cium-0 dScmLB"
+          onClick={[Function]}
+        >
+          Dallas
+        </button>
+        <button
+          className="mediumButton__Button-sc-1e5cium-0 dScmLB"
+          onClick={[Function]}
+        >
+          Los Angeles
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

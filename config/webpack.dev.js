@@ -5,6 +5,7 @@ const devConfig = {
   mode: "development",
   output: {
     publicPath: "http://localhost:8080/",
+    assetModuleFilename: "src/assets/images/[name].[ext]",
   },
   devServer: {
     port: 8080,
