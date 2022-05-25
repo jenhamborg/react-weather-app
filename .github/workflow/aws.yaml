@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - layout-style-additional-setup
+      - main
 
 name: Run Tests
 
