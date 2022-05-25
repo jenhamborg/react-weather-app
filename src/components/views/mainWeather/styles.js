@@ -15,7 +15,7 @@ export const MainContainer = styled.div`
 export const MainHeader = styled.header`
   display: flex;
   justify-content: space-between;
-  flex-wrap: "wrap";
+  flex-wrap: wrap;
   text-align: center;
   h1 {
     font-size: 2.5rem;
@@ -28,6 +28,7 @@ export const MainContent = styled.div`
   .main-cards {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     padding: 1rem 0;
     width: 100%;
   }
