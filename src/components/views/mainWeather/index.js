@@ -72,6 +72,7 @@ export default function MainWeather() {
       .get(url)
       .then((res) => {
         setFeature(null);
+        setAirQuality(null);
         setWeatherData(res.data);
       })
       .catch((error) => {

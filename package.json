@@ -81,8 +81,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
-    "favicons": "^6.2.2",
-    "favicons-webpack-plugin": "^5.0.2",
     "jest-axe": "^6.0.0",
     "jest-environment-jsdom": "^28.1.0",
     "prettier": "^2.6.2",
