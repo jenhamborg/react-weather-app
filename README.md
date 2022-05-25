@@ -12,6 +12,8 @@ React Weather App created with Babel and Webpack.
 6. run `npm start`
 7. open browser to http://localhost:8080/
 
+- Plase note you must use http if you get an invalid key that may be the issue.
+
 ## Deployment & CI/CD
 
 CI/CD uses github actions. The project isn't currently setup to actualy deploy. Running github actions will run tests and get deployment to the point of connecting to a cloud providor.
