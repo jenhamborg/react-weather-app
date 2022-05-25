@@ -2,13 +2,13 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="App__Container-sc-oucsgb-0 gAfLvA"
+  className="App__Container-sc-oucsgb-0 eCvKKh"
 >
   <div
     className="styles__MainContainer-sc-izij1-0 iLpuxe"
   >
     <header
-      className="styles__MainHeader-sc-izij1-1 jAngzH"
+      className="styles__MainHeader-sc-izij1-1 jqrRpz"
     >
       <h1>
         Weather Now
@@ -37,7 +37,7 @@ exports[`renders correctly 1`] = `
       </div>
     </header>
     <div
-      className="styles__MainContent-sc-izij1-2 emyXXB"
+      className="styles__MainContent-sc-izij1-2 bbPpsm"
     >
       <div
         className="main-button-group"
