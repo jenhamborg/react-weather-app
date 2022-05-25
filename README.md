@@ -9,14 +9,15 @@ React Weather App created with Babel and Webpack.
 3. Get free api key from https://openweathermap.org/ for the current weather api.
 4. Add API key to .env file
 5. run `npm install`
-6. open browser to http://localhost:8080/
+6. run `npm start`
+7. open browser to http://localhost:8080/
 
 ## Deployment & CI/CD
 
 CI/CD uses github actions. The project isn't currently setup to actualy deploy. Running github actions will run tests and get deployment to the point of connecting to a cloud providor.
 See .github/workflows folder.
 
-Run build locally `npm run build`
+Run build locally`npm run build`
 
 ## Tests
 
